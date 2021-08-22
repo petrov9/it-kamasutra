@@ -16,3 +16,20 @@
 .item a.active {
     color: gold;
 }
+
+.friends {
+    display: flex;
+    padding-top: 10px;
+}
+
+.friend {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.friend img {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    margin-right: 10px;
+}

@@ -5,7 +5,8 @@ import React from "react";
 const DialogItem = (props) => {
     return (
         <div className={s.dialog}>
-            <NavLink to={'/dialogs/' + props.id}>{props.name}</NavLink>
+            <img src={props.state.avatarImage}/>
+            <NavLink to={'/dialogs/' + props.state.id}>{props.state.name}</NavLink>
         </div>
     );
 }

@@ -21,5 +21,13 @@
 }
 
 .messages .message {
-    color: white;
+    color: black;
+}
+
+.messages .myMessage {
+    padding-left: 0px;
+}
+
+.messages .notMyMessage {
+    padding-left: 100px;
 }
