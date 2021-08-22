@@ -1,8 +1,8 @@
-import classes from './Post.module.css'
+import s from './Post.module.css'
 
 const Post = (props) => {
     return (
-        <div className={classes.item}>
+        <div className={s.item}>
             <img src="https://www.meme-arsenal.com/memes/100773de10bd652a2366e129c5053a0a.jpg" alt="" id="src"/>
             {props.message}
             <div>
