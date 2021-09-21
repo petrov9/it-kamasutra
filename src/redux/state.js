@@ -1,4 +1,6 @@
-import {rerenderTireTree} from "../render";
+let rerenderTireTree = () => {
+
+}
 
 let state = {
     profilePage: {
@@ -58,7 +60,9 @@ let state = {
     }
 };
 
-export let addPost = () => {
+window.state = state;
+
+export const addPost = () => {
     let newPost = {
         id: 5,
         message: state.profilePage.newPostText,
@@ -68,9 +72,13 @@ export let addPost = () => {
     rerenderTireTree(state);
 }
 
-export let updateNewPostText = (newText) => {
+export const updateNewPostText = (newText) => {
     state.profilePage.newPostText = newText;
     rerenderTireTree(state);
+}
+
+export const subscribe = (observer) => {
+    rerenderTireTree = observer;
 }
 
 export default state;
