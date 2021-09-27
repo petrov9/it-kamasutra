@@ -2,7 +2,7 @@ import s from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
 
 const Navbar = (props) => {
-    let friends = props.state.friends.map(e => {
+    let friends = props.sidebarPage.friends.map(e => {
         return <div className={s.friend}>
             <img src={e.avatarImage}/>
             <div>{e.name}</div>
