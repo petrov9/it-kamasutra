@@ -4,17 +4,27 @@ import * as axios from "axios";
 import userPhoto from '../../assets/user.png'
 
 class User extends React.Component {
-    constructor(props) {
-        super(props);
+
+    getUsers = () => {
+        return this.props.users;
+    };
+
+
+    componentDidMount() {
         axios.get("https://social-network.samuraijs.com/api/1.0/users")
             .then(response => {
                 this.props.setUsers(response.data.items);
             });
     }
 
-    getUsers = () => {
-        return this.props.users;
-    };
+    componentWillUnmount() {
+        alert("Component will be unmount");
+    }
+
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        alert("Component was updated");
+    }
 
     render = () => {
         return (
