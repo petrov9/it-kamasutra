@@ -9,26 +9,52 @@ class User extends React.Component {
         return this.props.users;
     };
 
-
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users")
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
                 this.props.setUsers(response.data.items);
+                this.props.setTotalUserCount(response.data.totalCount);
             });
     }
 
-    componentWillUnmount() {
+    /*componentWillUnmount() {
         alert("Component will be unmount");
     }
 
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         alert("Component was updated");
+    }*/
+
+    onPageChanged = (pageNumber) => {
+        this.props.setCurrentPage(pageNumber);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items);
+            });
     }
 
     render = () => {
+
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+        let pages = [];
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i);
+        }
+
         return (
             <div>
+                <div>
+                    {
+                        pages.map(p => {
+                            if (p <= this.props.visiblePages) {
+                                return <span onClick={() => {
+                                    this.onPageChanged(p)
+                                }} className={this.props.currentPage === p && styles.selectedPage}>{p}</span>;
+                            }
+                        })
+                    }
+                </div>
                 {
                     this.props.users.map(u => {
                         return <div key={u.id}>
