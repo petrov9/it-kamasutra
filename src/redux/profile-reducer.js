@@ -1,4 +1,3 @@
-import sidebarReducer from "./sidebar-reducer";
 import {UsersAPI} from "../api/api";
 
 const ADD_POST = "ADD-POST";
@@ -43,9 +42,6 @@ export const setUserProfile = (profile) => {
 
 export const getProfile = (userId) => {
     return (dispatch) => {
-        if (!userId) {
-            userId = 2;
-        }
         UsersAPI.getProfile(userId).then(data => {
             dispatch(setUserProfile(data));
         });
