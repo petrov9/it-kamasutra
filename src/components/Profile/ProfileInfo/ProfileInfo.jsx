@@ -1,6 +1,7 @@
 import s from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import React from "react";
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
     if (!props.profile) {
@@ -20,17 +21,17 @@ const ProfileInfo = (props) => {
 
     return (
         <div>
-            <div>
+            {/*<div>
                 <img
                     src="https://media.cntraveler.com/photos/57fea9ec8584f8cd20e65f15/16:9/w_2580,c_limit/Aerial-One&OnlyReethiRah-Maldives-CRHotel.jpg"
                     alt="" id="src" width='1000px' height='500px'/>
-            </div>
+            </div>*/}
             <div className={s.descBlock}>
                 <div>
                     <img src={props.profile.photos.large}/>
                 </div>
                 <div>
-                    <p>About me: {props.profile.aboutMe}</p>
+                    <ProfileStatus status={props.profile.aboutMe}/>
                 </div>
                 <div>
                     <p>My contacts:</p>
@@ -39,7 +40,6 @@ const ProfileInfo = (props) => {
                     </div>
 
                 </div>
-                ava + desc
             </div>
         </div>
     );
