@@ -31,7 +31,7 @@ const ProfileInfo = (props) => {
                     <img src={props.profile.photos.large}/>
                 </div>
                 <div>
-                    <ProfileStatus status={props.profile.aboutMe}/>
+                    <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
                 </div>
                 <div>
                     <p>My contacts:</p>
