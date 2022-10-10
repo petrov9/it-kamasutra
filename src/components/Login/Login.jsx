@@ -1,5 +1,6 @@
 import React from 'react';
 import {Field, reduxForm} from "redux-form";
+import {AuthAPI} from "../../api/api";
 
 const LoginForm = (props) => {
     return (
@@ -28,7 +29,11 @@ const LoginReduxForm = reduxForm({
 const Login = (props) => {
 
     const onSubmit = (formData) => {
-        console.log(formData);
+        AuthAPI.login(formData.login, formData.password, formData.rememberMe).then(data => {
+            if (data.resultCode === 0) {
+                window.location.href = "/profile";
+            }
+        });
     }
 
     return (
