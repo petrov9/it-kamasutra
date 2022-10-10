@@ -39,7 +39,6 @@ let store = {
                 {id: 2, message: "How are you?", isMyMessage: false},
                 {id: 3, message: "Not bad", isMyMessage: true},
             ],
-            newMessageBody: ""
         },
         sidebarPage: {
             friends: [
