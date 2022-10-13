@@ -4,7 +4,7 @@ import React from "react";
 let Preloader = (props) => {
     return (
         <div style={{backgroundColor: 'white'}}>
-            <img src={preloader} />
+            <img style={{width: '150px'}} src={preloader} />
         </div>
     );
 }
