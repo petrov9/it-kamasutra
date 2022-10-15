@@ -26,7 +26,6 @@ const MyPostReduxForm = reduxForm({
 })(AddNewFormPost)
 
 const MyPosts = React.memo((props) => {
-    console.log("RENDER");
 
     let posts = [...props.posts].reverse().map(e => <Post id={e.id} message={e.message} likeCount={e.likesCount}/>)
 

@@ -13,11 +13,6 @@ export const UsersAPI = {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data);
     },
 
-    getProfile(userId) {
-        console.warn('Method deprecated. Use ProfileAPI.getProfile() instead')
-        return ProfileAPI.getProfile(userId);
-    },
-
     follow(userId) {
         return instance.post(`follow/` + userId).then(response => response.data);
     },
