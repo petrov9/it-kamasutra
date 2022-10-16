@@ -1,16 +1,17 @@
 import './App.css';
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
-import {Component} from "react";
+import React, {Component} from "react";
 import {compose} from "redux";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
+import store from "./redux/redux-store";
 
 class App extends Component {
 
@@ -25,27 +26,25 @@ class App extends Component {
         }
 
         return (
-            <BrowserRouter>
-                <div className='app-wrapper'>
-                    <HeaderContainer/>
-                    <NavbarContainer/>
-                    <div className='app-wrapper-content'>
-                        <Route path='/dialogs' render={() =>
-                            <DialogsContainer/>
-                        }/>
-                        <Route path='/profile/:userId?' render={() =>
-                            <ProfileContainer/>
-                        }/>
-                        <Route path='/users' render={() =>
-                            <UsersContainer/>
-                        }/>
-                        <Route path='/login' render={() =>
-                            <Login/>
-                        }/>
-                    </div>
-
+            <div className='app-wrapper'>
+                <HeaderContainer/>
+                <NavbarContainer/>
+                <div className='app-wrapper-content'>
+                    <Route path='/dialogs' render={() =>
+                        <DialogsContainer/>
+                    }/>
+                    <Route path='/profile/:userId?' render={() =>
+                        <ProfileContainer/>
+                    }/>
+                    <Route path='/users' render={() =>
+                        <UsersContainer/>
+                    }/>
+                    <Route path='/login' render={() =>
+                        <Login/>
+                    }/>
                 </div>
-            </BrowserRouter>
+
+            </div>
         );
     }
 }
@@ -54,6 +53,17 @@ const mapStateToProps = (state) => ({
     initialized: state.app.initialized
 });
 
-export default compose(
+let AppContainer =  compose(
+    withRouter,
     connect(mapStateToProps, {initializeApp})
-)(App)
+)(App);
+
+const SamuraiJSApp = (props) => {
+    return <BrowserRouter>
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>
+    </BrowserRouter>
+}
+
+export default SamuraiJSApp;
