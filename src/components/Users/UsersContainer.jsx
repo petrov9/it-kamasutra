@@ -16,7 +16,7 @@ import {
     getIsFetching,
     getPageSize,
     getTotalUsersCount,
-    getVisiblePages
+    getPortionSize
 } from "../../redux/users-selectors";
 
 
@@ -38,7 +38,7 @@ class UsersContainer extends React.Component {
             {this.props.isFetching ? <Preloader/> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize}
-                   visiblePages={this.props.visiblePages}
+                   portionSize={this.props.visiblePages}
                    currentPage={this.props.currentPage}
                    users={this.props.users}
                    onPageChanged={this.onPageChanged}
@@ -57,7 +57,7 @@ let mapStateToProps = (state) => {
         pageSize: getPageSize(state),
         totalUsersCount: getTotalUsersCount(state),
         currentPage: getCurrentPage(state),
-        visiblePages: getVisiblePages(state),
+        portionSize: getPortionSize(state),
         isFetching: getIsFetching(state),
         followingInProgress: getFollowingInProgress(state)
     };

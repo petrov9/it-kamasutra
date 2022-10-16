@@ -20,8 +20,8 @@ export const getCurrentPage = (state) => {
     return state.usersPage.currentPage;
 }
 
-export const getVisiblePages = (state) => {
-    return state.usersPage.visiblePages;
+export const getPortionSize = (state) => {
+    return state.usersPage.portionSize;
 }
 
 export const getIsFetching = (state) => {
