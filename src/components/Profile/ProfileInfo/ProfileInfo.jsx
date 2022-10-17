@@ -2,8 +2,9 @@ import s from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
 import React from "react";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import userPhoto from "../../../assets/user.png";
 
-const ProfileInfo = ({profile, status, updateUserStatus}) => {
+const ProfileInfo = ({profile, status, updateUserStatus, isOwner, savePhoto}) => {
     if (!profile) {
         return <Preloader/>
     }
@@ -19,11 +20,21 @@ const ProfileInfo = ({profile, status, updateUserStatus}) => {
         contacts.push(<p>{profile.contacts.vk}</p>)
     }
 
+    const onMainPhotoSelected = (e) => {
+
+        if (e.target.files.length) {
+            savePhoto(e.target.files[0]);
+        }
+    }
+
     return (
         <div>
             <div className={s.descBlock}>
                 <div>
-                    <img src={profile.photos.large}/>
+                    <img src={profile.photos.large || userPhoto} className={s.mainPhoto}/>
+                    {
+                        isOwner && <input type={"file"} onChange={onMainPhotoSelected}/>
+                    }
                 </div>
                 <div>
                     <ProfileStatusWithHooks status={status} updateUserStatus={updateUserStatus}/>
