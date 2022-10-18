@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 
 const Navbar = (props) => {
     let friends = props.sidebarPage.friends.map(e => {
-        return <div className={s.friend}>
+        return <div key={e.id} className={s.friend}>
             <img src={e.avatarImage}/>
             <div>{e.name}</div>
         </div>;
