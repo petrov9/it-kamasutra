@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter, HashRouter, Route, withRouter} from "react-router-dom";
+import {BrowserRouter, HashRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
@@ -17,8 +17,17 @@ const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileCo
 
 class App extends Component {
 
+    catchAllUnhandledErrors = (promiseRejectionEvent) => {
+        alert(promiseRejectionEvent);
+    }
+
     componentDidMount() {
         this.props.initializeApp();
+        window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors);
     }
 
     render() {
@@ -32,14 +41,15 @@ class App extends Component {
                 <HeaderContainer/>
                 <NavbarContainer/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
-                    <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
-                    <Route path='/users' render={() =>
-                        <UsersContainer/>
-                    }/>
-                    <Route path='/login' render={() =>
-                        <Login/>
-                    }/>
+                    <Switch>
+                        <Route exact path='/'
+                               render={ () => <Redirect to={"/profile"}/> }/>
+                        <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
+                        <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
+                        <Route path='/users' render={() => <UsersContainer/>}/>
+                        <Route path='/login' render={() => <Login/>}/>
+                        <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
+                    </Switch>
                 </div>
 
             </div>
@@ -51,7 +61,7 @@ const mapStateToProps = (state) => ({
     initialized: state.app.initialized
 });
 
-let AppContainer =  compose(
+let AppContainer = compose(
     withRouter,
     connect(mapStateToProps, {initializeApp})
 )(App);
