@@ -1,8 +1,23 @@
-import sidebarReducer from "./sidebar-reducer";
-
 const SEND_MESSAGE = "SEND_MESSAGE";
 
-let initialState = {
+type DialogType = {
+    id: number,
+    name: string,
+    avatarImage: string
+}
+
+type MessageType = {
+    id: number,
+    message: string,
+    isMyMessage: boolean
+}
+
+type InitialStateType = {
+    dialogs: Array<DialogType>,
+    messages: Array<MessageType>
+}
+
+let initialState: InitialStateType = {
     dialogs: [
         {
             id: 1,
@@ -32,7 +47,7 @@ let initialState = {
     ],
 };
 
-const dialogsReducer = (state = initialState, action) => {
+const dialogsReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case SEND_MESSAGE:
             let body = action.newMessageBody;
@@ -45,7 +60,12 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
-export const sendMessageClick = (newMessageBody) => {
+type SendMessageClickActionType = {
+    type: typeof SEND_MESSAGE,
+    newMessageBody: string
+}
+
+export const sendMessageClick = (newMessageBody: string): SendMessageClickActionType => {
     return {
         type: SEND_MESSAGE,
         newMessageBody
