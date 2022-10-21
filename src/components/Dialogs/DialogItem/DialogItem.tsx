@@ -1,8 +1,13 @@
 import s from './DialogItem.module.css'
 import {NavLink} from "react-router-dom";
 import React from "react";
+import {DialogType} from "../../../types/types";
 
-const DialogItem = (props) => {
+type PropsType = {
+    state: DialogType
+}
+
+const DialogItem: React.FC<PropsType> = (props) => {
     return (
         <div className={s.dialog}>
             <img src={props.state.avatarImage}/>

@@ -3,13 +3,17 @@ import React from "react";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {Redirect} from "react-router-dom";
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 import {Textarea} from "../common/FormControls/FormsControls";
+import {DialogType, MessageType} from "../../types/types";
 
 let maxLength50 = maxLengthCreator(50);
 
-const AddMessageForm = (props) => {
+type FormProps = {
+}
+
+const AddMessageForm: React.FC<InjectedFormProps<FormProps>> = (props) => {
   return (
       <form onSubmit={props.handleSubmit}>
           <div>
@@ -28,11 +32,17 @@ const AddMessageFormRedux = reduxForm({
     form: "dialogAddMessageForm"
 }) (AddMessageForm)
 
-const Dialogs = (props) => {
-    let dialogsElements = props.dialogsPage.dialogs.map(e => <DialogItem state={e}/>);
-    let messagesElements = props.dialogsPage.messages.map(e => <Message state={e}/>)
+type PropsType = {
+    dialogsPage: any
+    isAuth: boolean
+    sendMessageClick: (newMessageBody: string) => void
+}
 
-    let addNewMessage = (values) => {
+const Dialogs: React.FC<PropsType> = (props) => {
+    let dialogsElements = props.dialogsPage.dialogs.map((e: DialogType) => <DialogItem state={e}/>);
+    let messagesElements = props.dialogsPage.messages.map((e: MessageType) => <Message state={e}/>)
+
+    let addNewMessage = (values: any) => {
         props.sendMessageClick(values.newMessageBody);
     }
 
