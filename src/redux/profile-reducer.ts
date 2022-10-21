@@ -1,4 +1,4 @@
-import {ProfileAPI} from "../api/api";
+import {ProfileAPI, ResultCode} from "../api/api";
 import {stopSubmit} from "redux-form";
 import {PhotosType, PostType, ProfileType} from "../types/types";
 
@@ -92,9 +92,9 @@ export const updateUserStatus = (status: string) => async (dispatch: any) => {
     try {
         let response = await ProfileAPI.updateStatus(status);
 
-        if (response.data.resultCode === 0) {
+        if (response.data.resultCode === ResultCode.Success) {
             dispatch(setStatus(status));
-        } else if (response.data.resultCode === 1) { // wrong status
+        } else if (response.data.resultCode === ResultCode.Error) { // wrong status
 
         }
     } catch (error) {
@@ -105,7 +105,7 @@ export const updateUserStatus = (status: string) => async (dispatch: any) => {
 export const savePhoto = (file: any) => async (dispatch: any) => {
     let response = await ProfileAPI.savePhoto(file);
 
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === ResultCode.Success) {
         dispatch(savePhotoSuccess(response.data.data.photos));
     }
 }
@@ -115,7 +115,7 @@ export const saveProfile = (profile: ProfileType) => async (dispatch: any, getSt
     const userId = getState().auth.userId;
     let response = await ProfileAPI.saveProfile(profile);
 
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === ResultCode.Success) {
         dispatch(getProfile(userId))
     } else {
         const errorMessage = response.data.messages[0];
