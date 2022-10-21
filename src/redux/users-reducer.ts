@@ -80,46 +80,51 @@ type FollowSuccessType = {
     type: typeof FOLLOW,
     userId: number
 }
+
 type UnfollowSuccessType = {
     type: typeof UNFOLLOW,
     userId: number
 }
+export const followSuccess = (userId: number): FollowSuccessType => {
+    return {type: FOLLOW, userId}
+}
+
 type SetUsersType = {
     type: typeof SET_USERS,
     users: Array<UserType>
 }
+export const unfollowSuccess = (userId: number): UnfollowSuccessType => {
+    return {type: UNFOLLOW, userId}
+}
+
 type SetCurrentPageType = {
     type: typeof SET_CURRENT_PAGE,
     currentPage: number
 }
+export const setUsers = (users: Array<UserType>): SetUsersType => {
+    return {type: SET_USERS, users}
+}
+
 type SetTotalUserCountType = {
     type: typeof SET_USERS_TOTAL_COUNT,
     totalCount: number
 }
+export const setCurrentPage = (currentPage: number): SetCurrentPageType => {
+    return {type: SET_CURRENT_PAGE, currentPage}
+}
+
 type ToggleIsFetchingType = {
     type: typeof TOGGLE_IS_FETCHING,
     isFetching: boolean
 }
+export const setTotalUserCount = (totalCount: number): SetTotalUserCountType => {
+    return {type: SET_USERS_TOTAL_COUNT, totalCount}
+}
+
 type ToggleFollowingProgressType = {
     type: typeof TOGGLE_IS_FOLLOWING_PROGRESS,
     isFetching: boolean,
     userId: number
-}
-
-export const followSuccess = (userId: number): FollowSuccessType => {
-    return {type: FOLLOW, userId}
-}
-export const unfollowSuccess = (userId: number): UnfollowSuccessType => {
-    return {type: UNFOLLOW, userId}
-}
-export const setUsers = (users: Array<UserType>): SetUsersType => {
-    return {type: SET_USERS, users}
-}
-export const setCurrentPage = (currentPage: number): SetCurrentPageType => {
-    return {type: SET_CURRENT_PAGE, currentPage}
-}
-export const setTotalUserCount = (totalCount: number): SetTotalUserCountType => {
-    return {type: SET_USERS_TOTAL_COUNT, totalCount}
 }
 export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingType => {
     return {type: TOGGLE_IS_FETCHING, isFetching}
