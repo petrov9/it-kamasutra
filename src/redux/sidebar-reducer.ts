@@ -1,13 +1,3 @@
-type FriendType = {
-    id: number,
-    name: string,
-    avatarImage: string
-}
-
-type InitialStateType = {
-    friends: Array<FriendType>
-}
-
 let initialState: InitialStateType = {
     friends: [
         {
@@ -33,3 +23,12 @@ const sidebarReducer = (state = initialState, action: any): InitialStateType => 
 }
 
 export default sidebarReducer;
+
+type FriendType = {
+    id: number,
+    name: string,
+    avatarImage: string
+}
+type InitialStateType = {
+    friends: Array<FriendType>
+}
