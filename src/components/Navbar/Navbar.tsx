@@ -1,7 +1,13 @@
 import s from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
+import React from "react";
+import {InitialStateType} from "../../redux/sidebar-reducer";
 
-const Navbar = (props) => {
+type PropsType = {
+    sidebarPage: InitialStateType
+}
+
+const Navbar: React.FC<PropsType> = (props) => {
     let friends = props.sidebarPage.friends.map(e => {
         return <div key={e.id} className={s.friend}>
             <img src={e.avatarImage}/>

@@ -6,15 +6,15 @@ describe("Profile status component", () => {
     test("status from props should be in the state", () => {
 
         let statusText = "my status";
-        const component = create((<ProfileStatus status={statusText}/>))
-        const instance = component.getInstance();
+        const component = create((<ProfileStatus status={statusText} updateUserStatus={() => {}}/>))
+        const instance = component.getInstance() as any;
         expect(instance.state.status).toBe(statusText);
     });
 
     test("after creation <span> should be displayed", () => {
 
         let statusText = "my status";
-        const component = create((<ProfileStatus status={statusText}/>))
+        const component = create((<ProfileStatus status={statusText} updateUserStatus={() => {}}/>))
         const instance = component.root;
         let span = instance.findByType("span");
         expect(span.children).toEqual([statusText]);
@@ -23,7 +23,7 @@ describe("Profile status component", () => {
     test("after creation <input> shouldn't be displayed", () => {
 
         let statusText = "my status";
-        const component = create((<ProfileStatus status={statusText}/>))
+        const component = create((<ProfileStatus status={statusText} updateUserStatus={() => {}}/>))
         const instance = component.root;
 
         expect(() => {
@@ -34,7 +34,7 @@ describe("Profile status component", () => {
     test("input should be displayed in edit mode instead of span", () => {
 
         let statusText = "my status";
-        const component = create((<ProfileStatus status={statusText}/>))
+        const component = create((<ProfileStatus status={statusText} updateUserStatus={() => {}}/>))
         const instance = component.root;
         let span = instance.findByType("span");
         span.props.onDoubleClick();
@@ -48,7 +48,7 @@ describe("Profile status component", () => {
 
         let statusText = "my status";
         const component = create((<ProfileStatus updateUserStatus={mockCallback} status={statusText}/>))
-        const instance = component.getInstance()
+        const instance = component.getInstance() as any;
         instance.deactivateEditMode()
 
         expect(mockCallback.mock.calls.length).toBe(1);

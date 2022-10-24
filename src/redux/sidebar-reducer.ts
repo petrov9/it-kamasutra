@@ -29,6 +29,6 @@ type FriendType = {
     name: string,
     avatarImage: string
 }
-type InitialStateType = {
+export type InitialStateType = {
     friends: Array<FriendType>
 }
