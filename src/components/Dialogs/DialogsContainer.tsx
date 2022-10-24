@@ -6,14 +6,12 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 import {AppStateType} from "../../redux/redux-store";
 
-const sendMessageClick = actions.sendMessageClick
-
 type MapStateToPropsType = {
     dialogsPage: any
 }
 
 type MapDispatchToPropsType = {
-    sendMessageClick: (newMessageBody: string) => void
+    sendMessage: (newMessageBody: string) => void
 }
 
 type OwnPropsType = {
@@ -26,7 +24,7 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     };
 }
 
-export default compose(
-    connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps, {sendMessageClick}),
+export default compose<React.ComponentType>(
+    connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(mapStateToProps, {sendMessage: actions.sendMessage}),
     withAuthRedirect
 )(Dialogs);

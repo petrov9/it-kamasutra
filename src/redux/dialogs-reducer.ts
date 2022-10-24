@@ -31,13 +31,13 @@ let initialState: InitialStateType = {
     ],
 };
 
-const dialogsReducer = (state = initialState, action: ActionTypes) => {
+const dialogsReducer = (state = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
         case "SN/DIALOGS/SEND_MESSAGE":
             let body = action.newMessageBody;
             return {
                 ...state,
-                messages: [...state.messages, {id: 6, message: body}]
+                messages: [...state.messages, {id: 6, message: body, isMyMessage: true}]
             };
         default:
             return state;
@@ -45,12 +45,12 @@ const dialogsReducer = (state = initialState, action: ActionTypes) => {
 }
 
 export const actions = {
-    sendMessageClick: (newMessageBody: string) => ({type: "SN/DIALOGS/SEND_MESSAGE", newMessageBody}) as const
+    sendMessage: (newMessageBody: string) => ({type: "SN/DIALOGS/SEND_MESSAGE", newMessageBody}) as const
 }
 
 export default dialogsReducer;
 
-type InitialStateType = {
+export type InitialStateType = {
     dialogs: Array<DialogType>,
     messages: Array<MessageType>
 }

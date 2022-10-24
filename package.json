@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^12.1.10",
     "@types/jest": "^29.2.0",
     "@types/node": "^18.11.2",
-    "@types/react": "^18.0.21",
+    "@types/react": "^17.0.2",
     "@types/react-dom": "^18.0.6",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^0.22.0",

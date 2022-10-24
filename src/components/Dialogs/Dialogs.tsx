@@ -2,52 +2,25 @@ import s from './Dialogs.module.css'
 import React from "react";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {Redirect} from "react-router-dom";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {maxLengthCreator, required} from "../../utils/validators/validators";
-import {Textarea} from "../common/FormControls/FormsControls";
 import {DialogType, MessageType} from "../../types/types";
+import {InitialStateType} from "../../redux/dialogs-reducer";
+import {AddMessageFormRedux} from "./AddMessageForm";
 
-let maxLength50 = maxLengthCreator(50);
-
-type FormProps = {
+export type NewMessageFormValuesType = {
+    newMessageBody: string
 }
 
-const AddMessageForm: React.FC<InjectedFormProps<FormProps>> = (props) => {
-  return (
-      <form onSubmit={props.handleSubmit}>
-          <div>
-            <Field component={Textarea} name={"newMessageBody"}
-                   validate={[required, maxLength50]}
-                   placeholder='Enter your message'/>
-          </div>
-          <div>
-              <button>Отправить</button>
-          </div>
-      </form>
-  )
+type OwnPropsType = {
+    dialogsPage: InitialStateType
+    sendMessage: (newMessageBody: string) => void
 }
 
-const AddMessageFormRedux = reduxForm({
-    form: "dialogAddMessageForm"
-}) (AddMessageForm)
-
-type PropsType = {
-    dialogsPage: any
-    isAuth: boolean
-    sendMessageClick: (newMessageBody: string) => void
-}
-
-const Dialogs: React.FC<PropsType> = (props) => {
+const Dialogs: React.FC<OwnPropsType> = (props) => {
     let dialogsElements = props.dialogsPage.dialogs.map((e: DialogType) => <DialogItem state={e}/>);
     let messagesElements = props.dialogsPage.messages.map((e: MessageType) => <Message state={e}/>)
 
-    let addNewMessage = (values: any) => {
-        props.sendMessageClick(values.newMessageBody);
-    }
-
-    if (!props.isAuth) {
-        return <Redirect to={"/login"}/>
+    let addNewMessage = (values: NewMessageFormValuesType) => {
+        props.sendMessage(values.newMessageBody);
     }
 
     return (
