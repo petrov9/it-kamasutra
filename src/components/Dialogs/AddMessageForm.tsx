@@ -1,12 +1,12 @@
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 import React from "react";
 import {InjectedFormProps, reduxForm} from "redux-form";
-import {createField, Textarea} from "../common/FormControls/FormsControls";
+import {createField, GetStringKeys, Textarea} from "../common/FormControls/FormsControls";
 import {NewMessageFormValuesType} from "./Dialogs";
 
 let maxLength50 = maxLengthCreator(50);
 
-type NewMessageFormValuesKeysType = Extract<keyof NewMessageFormValuesType, string>
+type NewMessageFormValuesKeysType = GetStringKeys<NewMessageFormValuesType>
 type PropsType = {}
 
 const AddMessageForm: React.FC<InjectedFormProps<NewMessageFormValuesType, PropsType> & PropsType> = (props) => {

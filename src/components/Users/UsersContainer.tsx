@@ -26,7 +26,7 @@ type MapStatePropsType = {
     totalUsersCount: number
     portionSize: number
     users: Array<UserType>
-    followingInProgress: Array<Number>
+    followingInProgress: Array<number>
 }
 
 type MapDispatchPropsType = {
