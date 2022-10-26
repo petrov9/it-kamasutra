@@ -1,4 +1,4 @@
-import {ResultCode} from "../api/api";
+import {ApiResponseType, ResultCode} from "../api/api";
 import {updateObjectInArray} from "../utils/object-helpers";
 import {UserType} from "../types/types";
 import {InferActionTypes, BaseThunkType} from "./redux-store";
@@ -83,7 +83,8 @@ export const requestUsers = (requestPage: number, pageSize: number): ThunkType =
     }
 }
 
-const _followUnfollowFlow = async (dispatch: DispatchType, userId: number, apiMethod: any, actionCreator: (userId: number) => ActionTypes) => {
+const _followUnfollowFlow = async (dispatch: DispatchType, userId: number,
+                                   apiMethod: (userId: number) => Promise<ApiResponseType>, actionCreator: (userId: number) => ActionTypes) => {
     dispatch(actions.toggleFollowingProgress(true, userId));
     let data = await apiMethod(userId);
 
@@ -109,7 +110,7 @@ export const unfollow = (userId: number): ThunkType => {
 
 export default usersReducer;
 
-type InitialStateType = typeof initialState;
+export type InitialStateType = typeof initialState;
 type DispatchType = Dispatch<ActionTypes>
 type ActionTypes = InferActionTypes<typeof actions>
 type ThunkType = BaseThunkType<ActionTypes>;
