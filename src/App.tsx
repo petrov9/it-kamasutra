@@ -1,9 +1,9 @@
 import './App.css';
-import {BrowserRouter, HashRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
+import {HashRouter, Redirect, Route, Switch, withRouter} from "react-router-dom";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
-import UsersContainer from "./components/Users/UsersContainer";
+import {UsersPage} from "./components/Users/UsersPage";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
+import {LoginPage} from "./components/Login/LoginPage";
 import React, {Component} from "react";
 import {compose} from "redux";
 import {connect, Provider} from "react-redux";
@@ -54,8 +54,8 @@ class App extends Component<MapPropsType & DispatchPropsType> {
                                render={() => <Redirect to={"/profile"}/>}/>
                         <Route path='/dialogs' render={() => <SuspendedDialog/>}/>
                         <Route path='/profile/:userId?' render={() => <SuspendedProfile/>}/>
-                        <Route path='/users' render={() => <UsersContainer pageTitle={"Самураи"}/>}/>
-                        <Route path='/login' render={() => <Login/>}/>
+                        <Route path='/users' render={() => <UsersPage pageTitle={"Самураи"}/>}/>
+                        <Route path='/login' render={() => <LoginPage/>}/>
                         <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
                     </Switch>
                 </div>
@@ -75,11 +75,11 @@ let AppContainer = compose<React.ComponentType>(
 )(App);
 
 const SamuraiJSApp: React.FC = () => {
-    return <BrowserRouter>
+    return <HashRouter>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 }
 
 export default SamuraiJSApp;
