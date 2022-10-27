@@ -28,8 +28,8 @@ const Navbar: React.FC<PropsType> = (props) => {
                 </NavLink>
             </div>
             <div className={s.item}>
-                <NavLink to="/users" activeClassName={s.active}>
-                    Users
+                <NavLink to="/developers" activeClassName={s.active}>
+                    Developers
                 </NavLink>
             </div>
             <div className={s.item}>

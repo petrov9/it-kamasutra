@@ -64,7 +64,7 @@ export const Users: React.FC<PropsType> = () => {
 
 
         history.push({
-            pathname: "/users",
+            pathname: "/developers",
             search: queryString.stringify(query)
         })
     }, [filter, currentPage])
