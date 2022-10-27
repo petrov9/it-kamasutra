@@ -16,8 +16,8 @@ type OwnPropsType = {
 }
 
 const Dialogs: React.FC<OwnPropsType> = (props) => {
-    let dialogsElements = props.dialogsPage.dialogs.map((e: DialogType) => <DialogItem state={e}/>);
-    let messagesElements = props.dialogsPage.messages.map((e: MessageType) => <Message state={e}/>)
+    let dialogsElements = props.dialogsPage.dialogs.map((e: DialogType) => <DialogItem state={e} key={e.id}/>);
+    let messagesElements = props.dialogsPage.messages.map((e: MessageType) => <Message state={e} key={e.id}/>)
 
     let addNewMessage = (values: NewMessageFormValuesType) => {
         props.sendMessage(values.newMessageBody);

@@ -45,7 +45,7 @@ export const getAuthUserData = (): ThunkType => async (dispatch) => {
 export const login = (email: string, password: string, rememberMe: boolean, captcha: string): ThunkType => async (dispatch) => {
 
     let response = await AuthAPI.login(email, password, rememberMe, captcha);
-    debugger;
+
     // @ts-ignore
     if (response.resultCode === ResultCode.Success) {
         dispatch(getAuthUserData());
