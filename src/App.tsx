@@ -17,11 +17,13 @@ import store, {AppStateType} from "./redux/redux-store";
 import {withSuspense} from "./hoc/withSuspense";
 import {AppHeader} from "./components/Header/AppHeader";
 
-const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
-const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
+const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"))
+const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"))
+const ChatPage = React.lazy(() => import("./pages/Chat/ChatPage"))
 
 const SuspendedDialog = withSuspense(DialogsContainer)
 const SuspendedProfile = withSuspense(ProfileContainer)
+const SuspendedChatPage = withSuspense(ChatPage)
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = {
@@ -60,6 +62,11 @@ export const menuItems: MenuProps['items'] = [
                 label: (createLink("/developers", "Developers")),
             },
         ],
+    },
+    {
+        label: (createLink("/chat", "Chat")),
+        key: 'chat',
+        icon: <UserOutlined/>,
     },
     {
         label: (createLink("/news", "News")),
@@ -132,6 +139,7 @@ class App extends Component<MapPropsType & DispatchPropsType> {
                                 <Route path='/profile/:userId?' render={() => <SuspendedProfile/>}/>
                                 <Route path='/developers' render={() => <UsersPage pageTitle={"Самураи"}/>}/>
                                 <Route path='/login' render={() => <LoginPage/>}/>
+                                <Route path='/chat' render={() => <SuspendedChatPage/>}/>
                                 <Route path='*' render={() => <div>404 NOT FOUND</div>}/>
                             </Switch>
                         </Content>
